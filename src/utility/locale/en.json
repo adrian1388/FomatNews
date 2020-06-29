@@ -1,0 +1,16 @@
+{
+  "news": "News",
+  "business": "Business",
+  "entertainment": "Entertainment",
+  "general": "General",
+  "health": "Health",
+  "science": "Science",
+  "sports": "Sports",
+  "technology": "Technology",
+  "username": "Username",
+  "select": "Select...",
+  "takePic": "Take Picture",
+  "openGal": "Open Gallery",
+  "cancel": "Cancel",
+  "logout": "Log out"
+}
