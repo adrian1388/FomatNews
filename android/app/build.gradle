@@ -150,6 +150,13 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        
+        release {
+            storeFile file('release.keystore')
+            storePassword 'fomatNews'
+            keyAlias 'fomatNews'
+            keyPassword 'fomatNews'
+        }
     }
     buildTypes {
         debug {
