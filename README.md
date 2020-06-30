@@ -12,3 +12,6 @@ cd FomatNews
 yarn
 yarn android
 ```
+If you want an APK file of this project, you can download it here:
+
+https://drive.google.com/file/d/1aFKRwbZ-tRyeuHp1dyxy98iMugO1js6p/view?usp=sharing
