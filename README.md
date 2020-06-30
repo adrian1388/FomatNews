@@ -1,16 +1,15 @@
 
- * FOMAT NEWS
+**FOMAT NEWS**
+ - Application developed by HÉCTOR A. MOSQUERA
+ - as a recruitment testing for FOMAT MEDICAL RESEARCH
 
- * Application developed by HÉCTOR A. MOSQUERA
- * as a recruitment testing for FOMAT MEDICAL RESEARCH
-
-This project implements:
+**This project implements:**
 - Account creation
 - Login / Logout (authentication in storage)
 - Facebook Login
 - Camera and Camera Roll use
 - User profile updates
-- News requests to newsapi.org
+- News requests to newsapi.org (updated every minute)
 - Internationalization (language from device)
 
 
