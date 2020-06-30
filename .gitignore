@@ -360,3 +360,6 @@ Temporary Items
 .apdisk
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative
+
+# Build bundle
+android/app/src/main/assets/index.android.bundle
