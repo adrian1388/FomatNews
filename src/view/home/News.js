@@ -5,6 +5,7 @@ import { ActivityIndicator, Image, ScrollView } from "react-native";
 import { useIntl } from 'react-intl'
 import { getLocale } from "../../utility/locale";
 import { Categories } from "./Categories";
+import Updater from "./Updater";
 
 export async function getArticles(language = 'en', category) {
 
@@ -39,10 +40,7 @@ export const News = () => {
   const intl = useIntl();
 
   useEffect(() => {
-    const locale = getLocale();
-    console.log('category', category);
-    
-    getArticles(locale, category).then(data => {
+    getArticles(getLocale(), category).then(data => {
       setArticles(data)
       setLoading(false)
     })
@@ -50,15 +48,16 @@ export const News = () => {
 
   return (
     <>
+      <Updater refetch={() => {
+        setLoading(true)
+        getArticles(getLocale(), category).then(data => {
+          setArticles(data)
+          setLoading(false)
+        }); 
+      }} />
       <Title>{intl.formatMessage({ id: "news" })}</Title>
       <Categories setCategory={setCategory} category={category} setLoading={setLoading} />
-      <ScrollView
-        style={{ height: '100%' }}
-        onLayout={e => {
-          console.log('layout', e.nativeEvent.layout);
-
-        }}
-      >
+      <ScrollView style={{ height: '100%' }}>
         {loading && <ActivityIndicator />}
         {articles.map((a, index) => {
           if (a.description) {

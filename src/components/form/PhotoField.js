@@ -48,8 +48,6 @@ const PhotoField = ({
   ...restProps
 }) => {
   const intl = useIntl()
-console.log('wid::::', width, height);
-
   return (
     <FormIconBaseField
       name={name}
@@ -89,10 +87,7 @@ console.log('wid::::', width, height);
                 console.log('ImagePicker Error: ', response.error)
               } else if (response.customButton) {
                 // TODO is this OK?
-                console.log(
-                  'User tapped custom button: ',
-                  response.customButton
-                )
+                console.log('User tapped custom button: ', response.customButton)
               } else {
                 const source = 'data:' + response.type + ';base64,' + response.data
 

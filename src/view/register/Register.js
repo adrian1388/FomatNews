@@ -7,30 +7,26 @@
 
 import React, { Fragment, useState } from 'react'
 import { ScrollView, ActivityIndicator } from 'react-native'
-import { withTheme } from 'styled-components'
 import { string as yupString, object as yupObject, ref as yupRef } from 'yup'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { faUser } from '@fortawesome/free-regular-svg-icons'
 import { omit } from 'lodash'
-
 import Header from '../../logic/Header'
 import FormFinal from '../../components/form/FormFinal'
 import InputField from '../../components/form/InputField'
-// import SelectField from '../../components/form/SelectField'
-import { Container, Label, Title } from '../../components/common'
+import { Container, Title } from '../../components/common'
 import { withRouter } from '../../utility/routing'
-// import {userTypeOptions, iDCardValidator} from '../../utility/Util'
 import storage from '../../utility/storage'
+import { useIntl } from 'react-intl'
 
-const Register = ({ theme, history }) => {
-  const [loading, setLoading] = useState(false)
-  const fieldMargin = '25px 0 0'
+const Register = ({ history }) => {
+  const [loading, setLoading] = useState(false),
+    intl = useIntl(),
+    fieldMargin = '25px 0 0';
   return (
     <Container flex={1}>
       <Header flexDirection='row-reverse' />
       <FormFinal
-        endpoint='register'
-        contentType='application/json'
         onBeforeFetch={(sendData, resolve) => {
           const data = omit(sendData, 'confirmPassword')
 
@@ -40,8 +36,6 @@ const Register = ({ theme, history }) => {
               arr.push(data)
               storage.setItem('users', JSON.stringify(arr))
               setLoading(false)
-              console.log('goback');
-              
               resolve()
               history.goBack()
             }
@@ -57,32 +51,28 @@ const Register = ({ theme, history }) => {
 
               } else {
                 setLoading(false)
-                resolve({ username: 'Username is already in system' })
+                resolve({ username: intl.formatMessage({ id: 'usernameAlready' }) })
               }
             }
-            console.log('users', err, res);
           })
         }}
         validationSchema={yupObject().shape({
-          username: yupString().min(3).required(),
+          username: yupString().min(3).required(intl.formatMessage({id: 'required'})),
           password: yupString()
             .matches(
               /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/,
-              'Por seguridad, la contraseña debe tener al menos 8 caracteres: mínimo 1 letra, mínimo 1 número y mínimo 1 caracter especial'
+              intl.formatMessage({ id: 'passwordInstructions' })
             )
-            .required('Contraseña es un campo requerido'),
+            .required(intl.formatMessage({id: 'required'})),
           confirmPassword: yupString()
             .oneOf(
               [yupRef('password'), null],
-              'Las contraseñas deben ser iguales'
+              intl.formatMessage({id: 'mustBeSame'})
             )
-            .required('Debe confirmar la contraseña')
+            .required(intl.formatMessage({id: 'mustConfirm'}))
         })}
-        onSuccess={data => {
-          history.goBack()
-        }}
         setLoading={setLoading}
-        submitButtonTitle='Registrarse'
+        submitButtonTitle={intl.formatMessage({ id: 'saveAccount' })}
         wrapper={ScrollView}
         wrapperProps={{
           contentContainerStyle: {
@@ -93,16 +83,15 @@ const Register = ({ theme, history }) => {
             marginRight: 70
           },
           keyboardShouldPersistTaps: 'handled'
-          // showsVerticalScrollIndicator: false
         }}
       >
-        {form => (
+        {() => (
           <Fragment>
             {loading && <ActivityIndicator />}
-            <Title margins='30px 0 50px'>REGISTRO</Title>
+            <Title margins='30px 0 50px'>{intl.formatMessage({ id: 'register' })}</Title>
             <InputField
               margins={fieldMargin}
-              placeholder='username'
+              placeholder={intl.formatMessage({ id: 'username' })}
               name='username'
               autoCapitalize='none'
               maxLength={10}
@@ -112,25 +101,21 @@ const Register = ({ theme, history }) => {
               margins={fieldMargin}
               secureTextEntry
               name='password'
-              placeholder='Contraseña'
+              placeholder={intl.formatMessage({ id: 'password' })}
               icon={faLock}
             />
             <InputField
               margins={fieldMargin}
               secureTextEntry
               name='confirmPassword'
-              placeholder='Confirmar Contraseña'
+              placeholder={intl.formatMessage({ id: 'confirmPassword' })}
               icon={faLock}
             />
           </Fragment>
         )}
       </FormFinal>
-
-      <Label margins='0 0 40px' align='center' color={theme.globalFontColor}>
-        Una vez que te registras, aceptas los términos y condiciones
-      </Label>
     </Container>
   )
 }
 
-export default withTheme(withRouter(Register))
+export default withRouter(Register)

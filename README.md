@@ -1,3 +1,9 @@
+
+ * FOMAT NEWS
+
+ * Application developed by HÉCTOR A. MOSQUERA
+ * as a recruitment testing for FOMAT MEDICAL RESEARCH
+
 To run:
 
 ``` (bash)

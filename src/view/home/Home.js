@@ -22,9 +22,8 @@ const Register = ({history, disconnectFunction}) => {
       homePress={() => history.push('/profile')}
     >
       <Container flex={1}>
-        {console.log('DISCOOOOOO', disconnectFunction)}
         <Route path='/' exact component={News}/>
-  <Route path='/profile' exact component={rp => <Profile {...rp} disconnectFunction={disconnectFunction} />} />
+        <Route path='/profile' exact component={rp => <Profile {...rp} disconnectFunction={disconnectFunction} />} />
       </Container>
 
     </GenericPage>

@@ -7,9 +7,7 @@ import {
   Switch
 } from '../utility/routing'
 import storage from '../utility/storage'
-// import {doFetch} from '../utility/Util'
 import Login from '../view/login/Login'
-import { Container, Label } from '../components/common'
 import Register from '../view/register/Register'
 import Home from '../view/home/Home'
 
@@ -32,8 +30,6 @@ class AppProvider extends Component {
   }
 
   changeStateToDisconnect() {
-    console.log('LOG OUUUUTTT');
-    
     storage.removeItem('user', err => {
       console.log('error: ',err);
     }).then(res => {
@@ -43,7 +39,6 @@ class AppProvider extends Component {
 
   componentDidMount() {
     storage.getItem('user').then(result => {
-      console.log('callback R', result);
       if (result) {
         this.setState({user: result})
       }
@@ -51,8 +46,6 @@ class AppProvider extends Component {
   }
 
   render() {
-    console.log('state:::user', this.state.user);
-    
     return (
       <Router>
         <BackButton>
@@ -72,7 +65,7 @@ class AppProvider extends Component {
                 <Login connectFunction={this.changeStateToConnect} />
               </Route>
               <Route path='/register' component={Register} />
-              {/* <Redirect to="/"/> */}
+              <Redirect to="/"/>
             </Switch>
           )}
         </BackButton>

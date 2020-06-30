@@ -17,8 +17,8 @@ class GenericPage extends Component {
               backgroundColor1: '#fff',
               color: '#002463',
               logo: {
-                width: '102px',
-                height: '32px'
+                width: '100px',
+                height: '40px'
               }
             }
           }}

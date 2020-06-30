@@ -9,7 +9,7 @@ export const Categories = withTheme(({theme, setCategory, category, setLoading})
   const categoryIds = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology']
 
   return (
-    <ScrollView horizontal contentContainerStyle={{}}>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
       {categoryIds.map((cat, index) => (
         <TouchableOpacity
           key={index + cat}
