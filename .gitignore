@@ -361,5 +361,5 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/reactnative
 
-# Build bundle
+# Android bundle build
 android/app/src/main/assets/index.android.bundle
